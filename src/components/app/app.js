@@ -15,8 +15,8 @@ export default class App extends Component {
                 <Header />
                 <RandomPlanet />
                 <PersonsPage />
-                <PlanetsPage />
-                <StarshipsPage />
+                {/*<PlanetsPage />
+                <StarshipsPage />*/}
             </div>
         );
     }

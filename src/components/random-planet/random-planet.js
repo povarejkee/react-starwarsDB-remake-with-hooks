@@ -25,12 +25,12 @@ export default function RandomPlanet() {
 
     swapiService.getPlanet(id)
         .then(planet => {
-        setPlanet(planet)
-        setLoadingStatus(false)
+          setPlanet(planet)
+          setLoadingStatus(false)
       })
         .catch(() => {
-        setErrorStatus(true)
-        setLoadingStatus(false)
+          setErrorStatus(true)
+          setLoadingStatus(false)
       })
   }
 

@@ -1,42 +1,31 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react"
 
-import "./item-list.css";
-import Loader from "../loader";
+import "./item-list.css"
+import Loader from "../loader"
 
-export default class ItemList extends Component {
-  state = {
-    items: null,
-    imgURL: null
-  };
+export default function ItemList(props) {
+  const { getItems, renderItem, onItemSelected } = props
+  const [items, setItems] = useState(null)
 
-  componentDidMount() {
-    this.props.getItems().then(items => {
-      this.setState({ items });
-    });
-  }
+  useEffect(() => getItems().then(items => setItems(items)), [])
 
-  renderItems() {
-    return this.state.items.map(item => {
-      const { id } = item;
-      return (
+  const renderItems = () => {
+    return items.map(item => (
         <li
           className="list-group-item"
-          key={id}
-          onClick={() => this.props.onItemSelected(id)}
+          key={item.id}
+          onClick={() => onItemSelected(item.id)}
         >
-          {this.props.renderItem(item)}
+          {renderItem(item)}
         </li>
-      );
-    });
+      )
+    )
   }
-
-  render() {
-    const { items } = this.state;
 
     return (
       <ul className="item-list list-group">
-        {!items ? <Loader /> : this.renderItems()}
+        {!items ? <Loader /> : renderItems()}
       </ul>
-    );
-  }
+    )
+
 }
