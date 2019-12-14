@@ -4,7 +4,6 @@ import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
-import { ListItem } from "../item-details/item-details";
 
 export default class StarshipsPage extends Component {
   swapiService = new SwapiService();
@@ -34,8 +33,8 @@ export default class StarshipsPage extends Component {
         getItem={getStarship}
         getImageURL={id => getImageURL("starships", id)}
       >
-        <ListItem field="model" label="Model" />
-        <ListItem field="length" label="Length" />
+{/*        <ListItem field="model" label="Model" />
+        <ListItem field="length" label="Length" />*/}
       </ItemDetails>
     );
 

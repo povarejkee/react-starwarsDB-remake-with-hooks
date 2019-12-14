@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Children, cloneElement } from "react";
+import React, { Component, Fragment } from "react";
 
 import "./item-details.css";
 
@@ -29,46 +29,37 @@ export default class ItemDetails extends Component {
 
   render() {
     const { item, isLoading, imageURL } = this.state;
+    const { fields } = this.props;
 
     return (
       <div className="person-details card">
+
         {!item && !isLoading && (
           <span>Please, select a person from a list</span>
         )}
+
         {item && !isLoading && (
-          <ItemView
-            item={item}
-            children={this.props.children}
-            images={imageURL}
-          />
+            <Fragment>
+                <img className="person-image" src={imageURL} />
+                <div className="card-body">
+                    <h4>{item.name}</h4>
+                    <ul className="list-group list-group-flush">
+                        {fields.map(field => {
+                            return (
+                                <li className="list-group-item" key={field.name}>
+                                    <span className="term">{field.label}</span>
+                                    <span>{item[field.name]}</span>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            </Fragment>
         )}
+
         {isLoading && <Loader />}
+
       </div>
     );
   }
 }
-
-const ItemView = ({ item, children, images }) => {
-  return (
-    <Fragment>
-      <img className="person-image" src={images} />
-      <div className="card-body">
-        <h4>{item.name}</h4>
-        <ul className="list-group list-group-flush">
-          {Children.map(children, child => {
-            return cloneElement(child, { item });
-          })}
-        </ul>
-      </div>
-    </Fragment>
-  );
-};
-
-export const ListItem = ({ item, field, label }) => {
-  return (
-    <li className="list-group-item">
-      <span className="term">{label}</span>
-      <span>{item[field]}</span>
-    </li>
-  );
-};

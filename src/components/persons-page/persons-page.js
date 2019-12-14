@@ -6,7 +6,6 @@ import ItemList from "../item-list"
 import ItemDetails from "../item-details"
 import SwapiService from "../../services/swapi-service"
 import Row from "../row"
-import { ListItem } from "../item-details/item-details"
 
 export default function PersonsPage() {
   const swapiService = new SwapiService()
@@ -27,10 +26,11 @@ export default function PersonsPage() {
       selectedItem={selectedPerson}
       getItem={getPerson}
       getImageURL={id => getImageURL("characters", id)}
-    >
-      <ListItem field="gender" label="Gender" />
-      <ListItem field="birthYear" label="Birth Year" />
-    </ItemDetails>
+      fields={[
+            { name: 'gender', label: 'Gender' },
+            { name: 'birthYear', label: 'Birth Year' }
+          ]}
+    />
   )
 
   return <Row leftPath={itemList} rightPath={personDetails} />

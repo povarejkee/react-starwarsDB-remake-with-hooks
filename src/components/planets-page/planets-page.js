@@ -4,7 +4,6 @@ import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
-import { ListItem } from "../item-details/item-details";
 
 export default class PlanetsPage extends Component {
   swapiService = new SwapiService();
@@ -34,8 +33,8 @@ export default class PlanetsPage extends Component {
         getItem={getPlanet}
         getImageURL={id => getImageURL("planets", id)}
       >
-        <ListItem field="population" label="Population" />
-        <ListItem field="rotationPeriod" label="Rotation Period" />
+{/*        <ListItem field="population" label="Population" />
+        <ListItem field="rotationPeriod" label="Rotation Period" />*/}
       </ItemDetails>
     );
 

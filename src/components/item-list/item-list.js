@@ -7,7 +7,9 @@ export default function ItemList(props) {
   const { getItems, renderItem, onItemSelected } = props
   const [items, setItems] = useState(null)
 
-  useEffect(() => getItems().then(items => setItems(items)), [])
+  useEffect(() => {
+    getItems().then(items => setItems(items))
+  }, [])
 
   const renderItems = () => {
     return items.map(item => (
