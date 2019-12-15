@@ -1,43 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react"
 
-import ItemList from "../item-list";
-import ItemDetails from "../item-details";
-import SwapiService from "../../services/swapi-service";
-import Row from "../row";
+import ItemList from "../item-list"
+import ItemDetails from "../item-details"
+import SwapiService from "../../services/swapi-service"
+import Row from "../row"
 
-export default class StarshipsPage extends Component {
-  swapiService = new SwapiService();
+export default function StarshipsPage() {
+  const swapiService = new SwapiService()
+  const { getAllStarships, getStarship, getImageURL } = swapiService
 
-  state = {
-    selectedStarship: null
-  };
-
-  onStarshipSelected = id => {
-    this.setState({ selectedStarship: id });
-  };
-
-  render() {
-    const { getAllStarships, getStarship, getImageURL } = this.swapiService;
+  const [selectedStarship, selectStarship] = useState(null)
 
     const itemList = (
       <ItemList
-        onItemSelected={this.onStarshipSelected}
+        onItemSelected={selectStarship}
         getItems={getAllStarships}
         renderItem={i => `${i.name} (${i.model})`}
       />
-    );
+    )
 
     const starshipDetails = (
       <ItemDetails
-        selectedItem={this.state.selectedStarship}
+        selectedItem={selectedStarship}
         getItem={getStarship}
         getImageURL={id => getImageURL("starships", id)}
-      >
-{/*        <ListItem field="model" label="Model" />
-        <ListItem field="length" label="Length" />*/}
-      </ItemDetails>
-    );
+        fields={[
+          {name: 'model', label: 'Model'},
+          {name: 'length', label: 'Length'}
+        ]}
+      />
+    )
 
-    return <Row leftPath={itemList} rightPath={starshipDetails} />;
-  }
+    return <Row leftPath={itemList} rightPath={starshipDetails} />
 }

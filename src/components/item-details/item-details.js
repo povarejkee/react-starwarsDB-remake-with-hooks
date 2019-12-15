@@ -4,7 +4,7 @@ import "./item-details.css";
 
 import Loader from "../loader";
 
-export function ItemDetails(props) {
+export default function ItemDetails(props) {
   const { fields, selectedItem, getItem, getImageURL } = props
 
   const [item, setItem] = useState(null)
@@ -28,7 +28,7 @@ export function ItemDetails(props) {
       <div className="person-details card">
 
         {!item && !isLoading && (
-          <span>Please, select a person from a list</span>
+          <span>Please, select an item from a list</span>
         )}
 
         {item && !isLoading && (

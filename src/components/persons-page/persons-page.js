@@ -5,7 +5,7 @@ import "./persons-page.css"
 import ItemList from "../item-list"
 import SwapiService from "../../services/swapi-service"
 import Row from "../row"
-import { ItemDetails } from "../item-details/item-details"
+import ItemDetails from "../item-details/item-details"
 
 export default function PersonsPage() {
   const swapiService = new SwapiService()

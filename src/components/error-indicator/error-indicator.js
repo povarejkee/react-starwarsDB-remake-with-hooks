@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import './error-indicator.css';
-import icon from './death-star.png';
+import './error-indicator.css'
+import icon from './death-star.png'
 
 const ErrorIndicator = () => {
   return (
@@ -15,7 +15,7 @@ const ErrorIndicator = () => {
         (but we already sent droids to fix it)
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default ErrorIndicator;
+export default ErrorIndicator
