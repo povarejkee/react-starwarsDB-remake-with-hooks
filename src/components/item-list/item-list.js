@@ -5,6 +5,7 @@ import Loader from "../loader"
 
 export default function ItemList(props) {
   const { getItems, renderItem, onItemSelected } = props
+
   const [items, setItems] = useState(null)
 
   useEffect(() => {

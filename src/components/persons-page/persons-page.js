@@ -3,14 +3,14 @@ import React, { useState } from "react"
 import "./persons-page.css"
 
 import ItemList from "../item-list"
-import ItemDetails from "../item-details"
 import SwapiService from "../../services/swapi-service"
 import Row from "../row"
+import { ItemDetails } from "../item-details/item-details"
 
 export default function PersonsPage() {
   const swapiService = new SwapiService()
-
   const { getAllPeople, getPerson, getImageURL } = swapiService
+
   const [selectedPerson, selectPerson] = useState(null)
 
   const itemList = (

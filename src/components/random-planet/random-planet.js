@@ -45,6 +45,7 @@ export default function RandomPlanet() {
 
 const PlanetView = ({ planet, getImageUrl }) => {
   const { id, name, population, rotationPeriod, diameter } = planet
+
   return (
     <Fragment>
       <img

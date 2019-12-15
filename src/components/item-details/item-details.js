@@ -1,35 +1,28 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 
 import "./item-details.css";
 
 import Loader from "../loader";
 
-export default class ItemDetails extends Component {
-  state = {
-    item: null,
-    isLoading: false,
-    imageURL: null
-  };
+export function ItemDetails(props) {
+  const { fields, selectedItem, getItem, getImageURL } = props
 
-  componentDidUpdate(prevProps) {
-    const { getItem, selectedItem, getImageURL } = this.props;
+  const [item, setItem] = useState(null)
+  const [imageURL, setImageURL] = useState(null)
+  const [isLoading, setLoading] = useState(false)
 
-    if (prevProps.selectedItem !== selectedItem) {
-      this.setState({ isLoading: true });
+  useEffect(() => {
+    if (selectedItem) {
+      setLoading(true)
 
-      getItem(selectedItem).then(item =>
-        this.setState({
-          item,
-          isLoading: false,
-          imageURL: getImageURL(selectedItem)
-        })
-      );
+      getItem(selectedItem).then(item => {
+        setItem(item)
+        setImageURL(getImageURL(selectedItem))
+        setLoading(false)
+      })
+
     }
-  }
-
-  render() {
-    const { item, isLoading, imageURL } = this.state;
-    const { fields } = this.props;
+  }, [selectedItem])
 
     return (
       <div className="person-details card">
@@ -60,6 +53,5 @@ export default class ItemDetails extends Component {
         {isLoading && <Loader />}
 
       </div>
-    );
-  }
+    )
 }
