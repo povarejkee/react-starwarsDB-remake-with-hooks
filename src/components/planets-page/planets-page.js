@@ -1,9 +1,8 @@
-import React, { useState } from "react"
-
-import ItemList from "../item-list"
-import ItemDetails from "../item-details"
-import SwapiService from "../../services/swapi-service"
-import Row from "../row"
+import React, { useState } from 'react'
+import SwapiService from '../../services/swapi-service'
+import ItemList from '../item-list'
+import ItemDetails from '../item-details'
+import Row from '../row'
 
 export default function PlanetsPage() {
   const swapiService = new SwapiService()
@@ -19,17 +18,17 @@ export default function PlanetsPage() {
     />
   )
 
-    const planetDetails = (
-      <ItemDetails
-        selectedItem={selectedPlanet}
-        getItem={getPlanet}
-        getImageURL={id => getImageURL("planets", id)}
-        fields={[
-          { name: 'population', label: 'Population' },
-          { name: 'rotationPeriod', label: 'Rotation Period' }
-        ]}
-      />
-    )
+  const planetDetails = (
+    <ItemDetails
+      selectedItem={selectedPlanet}
+      getItem={getPlanet}
+      getImageURL={id => getImageURL('planets', id)}
+      fields={[
+        { name: 'population', label: 'Population' },
+        { name: 'rotationPeriod', label: 'Rotation Period' },
+      ]}
+    />
+  )
 
-    return <Row leftPath={itemList} rightPath={planetDetails} />
+  return <Row leftPath={itemList} rightPath={planetDetails} />
 }

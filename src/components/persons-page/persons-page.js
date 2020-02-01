@@ -1,11 +1,9 @@
-import React, { useState } from "react"
-
-import "./persons-page.css"
-
-import ItemList from "../item-list"
-import SwapiService from "../../services/swapi-service"
-import Row from "../row"
-import ItemDetails from "../item-details/item-details"
+import React, { useState } from 'react'
+import './persons-page.css'
+import SwapiService from '../../services/swapi-service'
+import ItemList from '../item-list'
+import Row from '../row'
+import ItemDetails from '../item-details/item-details'
 
 export default function PersonsPage() {
   const swapiService = new SwapiService()
@@ -25,11 +23,11 @@ export default function PersonsPage() {
     <ItemDetails
       selectedItem={selectedPerson}
       getItem={getPerson}
-      getImageURL={id => getImageURL("characters", id)}
+      getImageURL={id => getImageURL('characters', id)}
       fields={[
-            { name: 'gender', label: 'Gender' },
-            { name: 'birthYear', label: 'Birth Year' }
-          ]}
+        { name: 'gender', label: 'Gender' },
+        { name: 'birthYear', label: 'Birth Year' },
+      ]}
     />
   )
 

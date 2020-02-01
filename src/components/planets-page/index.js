@@ -1,3 +1,3 @@
-import PlanetsPage from './planets-page';
+import PlanetsPage from './planets-page'
 
-export default PlanetsPage;
+export default PlanetsPage

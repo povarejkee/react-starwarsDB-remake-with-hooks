@@ -1,8 +1,6 @@
-import React, { useState, useEffect, Fragment } from "react";
-
-import "./item-details.css";
-
-import Loader from "../loader";
+import React, { useState, useEffect, Fragment } from 'react'
+import './item-details.css'
+import Loader from '../loader'
 
 export default function ItemDetails(props) {
   const { fields, selectedItem, getItem, getImageURL } = props
@@ -20,38 +18,33 @@ export default function ItemDetails(props) {
         setImageURL(getImageURL(selectedItem))
         setLoading(false)
       })
-
     }
   }, [selectedItem])
 
-    return (
-      <div className="person-details card">
+  return (
+    <div className="person-details card">
+      {!item && !isLoading && <span>Please, select an item from a list</span>}
 
-        {!item && !isLoading && (
-          <span>Please, select an item from a list</span>
-        )}
+      {item && !isLoading && (
+        <Fragment>
+          <img className="person-image" src={imageURL} alt="" />
+          <div className="card-body">
+            <h4>{item.name}</h4>
+            <ul className="list-group list-group-flush">
+              {fields.map(field => {
+                return (
+                  <li className="list-group-item" key={field.name}>
+                    <span className="term">{field.label}</span>
+                    <span>{item[field.name]}</span>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </Fragment>
+      )}
 
-        {item && !isLoading && (
-            <Fragment>
-                <img className="person-image" src={imageURL} />
-                <div className="card-body">
-                    <h4>{item.name}</h4>
-                    <ul className="list-group list-group-flush">
-                        {fields.map(field => {
-                            return (
-                                <li className="list-group-item" key={field.name}>
-                                    <span className="term">{field.label}</span>
-                                    <span>{item[field.name]}</span>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
-            </Fragment>
-        )}
-
-        {isLoading && <Loader />}
-
-      </div>
-    )
+      {isLoading && <Loader />}
+    </div>
+  )
 }

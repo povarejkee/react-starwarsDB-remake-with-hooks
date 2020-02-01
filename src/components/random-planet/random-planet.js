@@ -1,16 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react"
-
-import SwapiService from "../../services/swapi-service"
-
-import "./random-planet.css"
-import Loader from "../loader"
-import ErrorIndicator from "../error-indicator"
+import React, { Fragment, useState, useEffect } from 'react'
+import './random-planet.css'
+import SwapiService from '../../services/swapi-service'
+import Loader from '../loader'
+import ErrorIndicator from '../error-indicator'
 
 export default function RandomPlanet() {
   const swapiService = new SwapiService()
 
   const [planet, setPlanet] = useState(null)
-  const [isLoading, setLoadingStatus] = useState(true)
+  const [isLoading, setLoading] = useState(true)
   const [error, setErrorStatus] = useState(false)
 
   useEffect(() => {
@@ -23,24 +21,27 @@ export default function RandomPlanet() {
   const updatePlanet = () => {
     const id = Math.floor(Math.random() * 25) + 2
 
-    swapiService.getPlanet(id)
-        .then(planet => {
-          setPlanet(planet)
-          setLoadingStatus(false)
+    swapiService
+      .getPlanet(id)
+      .then(planet => {
+        setPlanet(planet)
+        setLoading(false)
       })
-        .catch(() => {
-          setErrorStatus(true)
-          setLoadingStatus(false)
+      .catch(() => {
+        setErrorStatus(true)
+        setLoading(false)
       })
   }
 
-    return (
-      <div className="random-planet jumbotron rounded">
-        {error && <ErrorIndicator />}
-        {isLoading && <Loader />}
-        {!error && !isLoading && <PlanetView planet={planet} getImageUrl={swapiService.getImageURL} />}
-      </div>
-    )
+  return (
+    <div className="random-planet jumbotron rounded">
+      {error && <ErrorIndicator message="Something has gone terribly wrong" />}
+      {isLoading && <Loader />}
+      {!error && !isLoading && (
+        <PlanetView planet={planet} getImageUrl={swapiService.getImageURL} />
+      )}
+    </div>
+  )
 }
 
 const PlanetView = ({ planet, getImageUrl }) => {
@@ -51,7 +52,7 @@ const PlanetView = ({ planet, getImageUrl }) => {
       <img
         className="planet-image"
         src={getImageUrl('planets', id)}
-        alt="planet image"
+        alt="planet"
       />
       <div>
         <h4>{name}</h4>

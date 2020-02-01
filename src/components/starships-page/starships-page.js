@@ -1,9 +1,8 @@
-import React, { useState } from "react"
-
-import ItemList from "../item-list"
-import ItemDetails from "../item-details"
-import SwapiService from "../../services/swapi-service"
-import Row from "../row"
+import React, { useState } from 'react'
+import SwapiService from '../../services/swapi-service'
+import ItemList from '../item-list'
+import ItemDetails from '../item-details'
+import Row from '../row'
 
 export default function StarshipsPage() {
   const swapiService = new SwapiService()
@@ -11,25 +10,25 @@ export default function StarshipsPage() {
 
   const [selectedStarship, selectStarship] = useState(null)
 
-    const itemList = (
-      <ItemList
-        onItemSelected={selectStarship}
-        getItems={getAllStarships}
-        renderItem={i => `${i.name} (${i.model})`}
-      />
-    )
+  const itemList = (
+    <ItemList
+      onItemSelected={selectStarship}
+      getItems={getAllStarships}
+      renderItem={i => `${i.name} (${i.model})`}
+    />
+  )
 
-    const starshipDetails = (
-      <ItemDetails
-        selectedItem={selectedStarship}
-        getItem={getStarship}
-        getImageURL={id => getImageURL("starships", id)}
-        fields={[
-          {name: 'model', label: 'Model'},
-          {name: 'length', label: 'Length'}
-        ]}
-      />
-    )
+  const starshipDetails = (
+    <ItemDetails
+      selectedItem={selectedStarship}
+      getItem={getStarship}
+      getImageURL={id => getImageURL('starships', id)}
+      fields={[
+        { name: 'model', label: 'Model' },
+        { name: 'length', label: 'Length' },
+      ]}
+    />
+  )
 
-    return <Row leftPath={itemList} rightPath={starshipDetails} />
+  return <Row leftPath={itemList} rightPath={starshipDetails} />
 }
